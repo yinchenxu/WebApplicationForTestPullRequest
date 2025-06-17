@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <script>
+        async function loadUsers() {
+            let response = await fetch("/api/users");
+            let users = await response.json();
+            document.getElementById("userList").innerHTML = users.map(u => `<li>${u.name}</li>`).join('');
+        }
+
+        async function addUser() {
+            let name = document.getElementById("userName").value;
+            await fetch("/api/users", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name })
+            });
+            loadUsers();
+        }
+    </script>
+</head>
+<body onload="loadUsers()">
+    <h2>用户管理</h2>
+    <input id="userName" type="text" placeholder="输入用户名">
+    <button onclick="addUser()">添加用户</button>
+    <ul id="userList"></ul>
+</body>
+</html>

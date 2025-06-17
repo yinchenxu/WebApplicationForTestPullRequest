@@ -1,5 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSingleton<IUserService, UserService>();
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 
@@ -13,6 +15,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.MapControllers();
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -23,3 +27,4 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
+
