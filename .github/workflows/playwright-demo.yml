@@ -8,7 +8,8 @@ on:
 
 jobs:
   demo-test:
-    runs-on: win-demo-runner
+    # runs-on: win-demo-runner
+    runs-on: [self-hosted, Windows]
     steps:
       - uses: actions/checkout@v4
 
